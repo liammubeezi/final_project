@@ -33,7 +33,6 @@ class TestFileReader:
     
     
     def test_read_lines_generator(self):
-        """Test line reading generator."""
         reader = FileReader("file1.txt")
         lines = list(reader.read_lines())
         assert lines == ["THIS WILL MAKE"]
