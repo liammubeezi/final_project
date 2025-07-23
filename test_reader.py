@@ -5,10 +5,6 @@ from reader import FileReader, AdvancedReader
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_teardown():
-    with open("sample1.txt", "w") as f:
-        f.write("A\nB\n")
-    with open("sample2.txt", "w") as f:
-        f.write("C\nD\n")
     with open("file1.txt", "w") as f:
          f.write("THIS WILL MAKE")
     with open("file2.txt", "w") as f:
@@ -19,8 +15,7 @@ def setup_teardown():
         f.write("THIS WILL MAKE")
 
     yield
-    test_files = ["sample1.txt", "sample2.txt", "combination.txt",
-                  "multi_combined.txt", "empty.txt", "file1.txt", "file2.txt", "two_files.txt"]
+    test_files = [ "combination.txt","empty.txt", "file1.txt", "file2.txt", "two_files.txt"]
     for file in test_files:
         if os.path.exists(file):
             os.remove(file)
