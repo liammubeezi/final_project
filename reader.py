@@ -1,6 +1,6 @@
 
 def decor(color: str):
-    """Decorator that adds ANSI color to function output."""
+    
     colors = {
             "red": "\033[91m", 
             "green": "\033[92m", 
@@ -27,7 +27,7 @@ def decor(color: str):
 
 
 class FileReader:
-    """File reader class with generator-based line reading."""
+    
     
     def __init__(self, path: str):
         """Initialize with file path."""
@@ -40,23 +40,23 @@ class FileReader:
     
     @path.setter
     def path(self, value: str):
-        """Set file path, only .txt files allowed."""
+        
         if not value.endswith(".txt"):
             raise ValueError("Only .txt files allowed.")
         self._path = value
     
     def read_lines(self):
-        """Generator that yields lines from file."""
+        
         with open(self.path, "r") as f:
             for line in f:
                 yield line
     
     def __str__(self) :
-        """String representation."""
+        
         return f"Reading from: {self.path}"
     
     def __add__(self, other):
-        """Concatenate two files using + operator."""
+       
         new_path = "two_files.txt"
         with open(new_path, "w") as f:
             f.writelines(self.read_lines())
@@ -65,31 +65,31 @@ class FileReader:
     
     @staticmethod
     def file_type() :
-        """Return supported file type."""
+        
         return ".txt"
     
     @classmethod
     def empty_file(cls, name: str):
-        """Create empty file and return FileReader instance."""
+        
         open(name, "w").close()
         return cls(name)
     
     @decor("green")
     def info(self) :
-        """Return file info with green color."""
+       
         return f"File path: {self.path}"
     @decor("blue")
     def info2(self) :
-        """Return file info with blue color."""
+        
         return f"File path: {self.path}"
 
 
 class AdvancedReader(FileReader):
-    """Enhanced file reader with multi-file concatenation."""
     
-    def concat_many(self, *others):
+    
+    def combiner(self, *others):
         """Concatenate multiple files."""
-        new_path = "big_sentence.txt"
+        new_path = "combination.txt"
         with open(new_path, "w") as f:
             f.writelines(self.read_lines())
             for other in others:
@@ -102,35 +102,33 @@ class AdvancedReader(FileReader):
 
 
 if __name__ == "__main__":
-    # Demo usage
+    
     print("Creating test files...")
-    print("part 1")
+    print("part 1 created")
     
     with open("file1.txt", "w") as f:
         f.write("THIS WILL MAKE")
-    print("part 2")
+    file1 = FileReader("file1.txt")
+    print(file1.info())
+
+    print("part 2 created:")
     with open("file2.txt", "w") as f:
         f.write(" A FULL SENTENCE! ")
-    
-    # Initialize readers
-    file1 = FileReader("file1.txt")
     file2 = FileReader("file2.txt")
-    
-    # Show colored info
-    print(file1.info())
     print(file2.info2())
     
-    # Combine files
+    
     combined = file1 + file2
     print(f"Full sentence: {combined.path}")
 
-    # Multi-file combination
+    
     adv = AdvancedReader("file1.txt")
    # multi = adv.concat_many(file2,  FileReader("file1.txt"), FileReader("file2.txt"), combined)
-    multi = adv.concat_many(
+    multi = adv.combiner(
     file2,
     FileReader('file1.txt'),
     FileReader('file2.txt'),
-    combined  # assuming combined is a FileReader or similar object
+    combined  
 )
-    print(f"all_three: {multi.path}")
+   
+    print(f"combined: {multi.path}")
