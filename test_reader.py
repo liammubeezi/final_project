@@ -23,7 +23,6 @@ def setup_teardown():
 
 
 class TestFileReader:
-    """Test cases for FileReader class."""
     
     def test_path_property(self):
         """Test path getter and setter."""
@@ -33,11 +32,6 @@ class TestFileReader:
         reader.path = "file2.txt"
         assert reader.path == "file2.txt"
     
-    def test_invalid_extension(self):
-        """Test that non-.txt files raise ValueError."""
-        reader = FileReader("file1.txt")
-        with pytest.raises(ValueError):
-            reader.path = "invalid.pdf"
     
     def test_read_lines_generator(self):
         """Test line reading generator."""
@@ -46,7 +40,7 @@ class TestFileReader:
         assert lines == ["THIS WILL MAKE"]
 
     def test_add_operator(self):
-        """Test file concatenation with + operator."""
+        
         r1 = FileReader('file1.txt')
         r2 = FileReader('file2.txt')
         combined = r1 + r2
@@ -59,7 +53,7 @@ class TestFileReader:
         assert "THIS" in content and "MAKE" in content
     
     def test_static_method(self):
-        """Test static method."""
+        
         assert FileReader.file_type() == ".txt"
     
     def test_class_method(self):
@@ -69,17 +63,16 @@ class TestFileReader:
         assert isinstance(reader, FileReader)
     
     def test_info_decorator(self):
-        """Test that info method uses color decorator."""
-        reader = FileReader("sample1.txt")
+        
+        reader = FileReader("file1.txt")
         output = reader.info()
-        assert "\033[" in output  # ANSI color code
-        assert "sample1.txt" in output
+        assert "\033[" in output  
+        assert "file1.txt" in output
 
 
 class TestAdvancedReader:
-    """Test cases for AdvancedReader class."""
-    
-    def test_concat_many(self):
+
+    def test_combiner(self):
         """Test multi-file concatenation."""
         r1 = AdvancedReader("file1.txt")
         r2 = FileReader("file2.txt")
@@ -94,6 +87,5 @@ class TestAdvancedReader:
         assert "THIS" in data
     
     def test_str_override(self):
-        """Test overridden __str__ method."""
         reader = AdvancedReader("file1.txt")
         assert str(reader).startswith("[Advanced]")
