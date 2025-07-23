@@ -27,36 +27,36 @@ class TestFileReader:
     
     def test_path_property(self):
         """Test path getter and setter."""
-        reader = FileReader("sample1.txt")
-        assert reader.path == "sample1.txt"
+        reader = FileReader("file1.txt")
+        assert reader.path == "file1.txt"
         
-        reader.path = "sample2.txt"
-        assert reader.path == "sample2.txt"
+        reader.path = "file2.txt"
+        assert reader.path == "file2.txt"
     
     def test_invalid_extension(self):
         """Test that non-.txt files raise ValueError."""
-        reader = FileReader("sample1.txt")
+        reader = FileReader("file1.txt")
         with pytest.raises(ValueError):
             reader.path = "invalid.pdf"
     
     def test_read_lines_generator(self):
         """Test line reading generator."""
-        reader = FileReader("sample1.txt")
+        reader = FileReader("file1.txt")
         lines = list(reader.read_lines())
-        assert lines == ["A\n", "B\n"]
-    
+        assert lines == ["THIS WILL MAKE"]
+
     def test_add_operator(self):
         """Test file concatenation with + operator."""
-        r1 = FileReader("sample1.txt")
-        r2 = FileReader("sample2.txt")
+        r1 = FileReader('file1.txt')
+        r2 = FileReader('file2.txt')
         combined = r1 + r2
-        
+
         assert isinstance(combined, FileReader)
         assert os.path.exists(combined.path)
-        
-        with open("combined.txt") as f:
+
+        with open("two_files.txt") as f:
             content = f.read()
-        assert "A" in content and "D" in content
+        assert "THIS" in content and "MAKE" in content
     
     def test_static_method(self):
         """Test static method."""
@@ -81,19 +81,19 @@ class TestAdvancedReader:
     
     def test_concat_many(self):
         """Test multi-file concatenation."""
-        r1 = AdvancedReader("sample1.txt")
-        r2 = FileReader("sample2.txt")
-        multi = r1.concat_many(r2, FileReader("sample1.txt"))
+        r1 = AdvancedReader("file1.txt")
+        r2 = FileReader("file2.txt")
+        multi = r1.combiner(r2, FileReader("file1.txt"))
         
         assert isinstance(multi, AdvancedReader)
         assert os.path.exists(multi.path)
         
-        with open("multi_combined.txt") as f:
+        with open("combination.txt") as f:
             data = f.read()
-        assert data.count("A") == 2  # A appears twice
-        assert "D" in data
+        assert data.count("THIS") == 2  # THIS appears twice
+        assert "THIS" in data
     
     def test_str_override(self):
         """Test overridden __str__ method."""
-        reader = AdvancedReader("sample1.txt")
+        reader = AdvancedReader("file1.txt")
         assert str(reader).startswith("[Advanced]")
