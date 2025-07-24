@@ -35,8 +35,8 @@ class FileReader:
     
     @property
     def path(self) :
-        """Get file path."""
-        return self._path
+            
+            return self._path
     
     @path.setter
     def path(self, value: str):
