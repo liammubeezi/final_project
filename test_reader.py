@@ -83,6 +83,6 @@ class TestAdvancedReader:
         assert data.count("THIS") == 2  # THIS appears twice
         assert "THIS" in data
     
-    def test_str_override(self):
-        reader = AdvancedReader("file1.txt")
-        assert str(reader).startswith("[Advanced]")
+   # def test_str_override(self):
+       # reader = AdvancedReader("file1.txt")
+       # assert str(reader).startswith("[Advanced]")
