@@ -29,8 +29,7 @@ def decor(color: str):
 class FileReader:
     
     
-    def __init__(self, path: str):
-        """Initialize with file path."""
+    def __init__(self, path: str):        
         self.path = path
     
     @property
@@ -88,7 +87,7 @@ class AdvancedReader(FileReader):
     
     
     def combiner(self, *others):
-        """Concatenate multiple files."""
+        
         new_path = "combination.txt"
         with open(new_path, "w") as f:
             f.writelines(self.read_lines())
@@ -97,7 +96,7 @@ class AdvancedReader(FileReader):
         return AdvancedReader(new_path)
     
     def __str__(self) :
-        """Enhanced string representation."""
+        
         return f"[Advanced] {self.path}"
 
 
