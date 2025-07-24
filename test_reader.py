@@ -24,7 +24,7 @@ def setup_teardown():
 class TestFileReader:
     
     def test_path_property(self):
-        """Test path getter and setter."""
+        
         reader = FileReader("file1.txt")
         assert reader.path == "file1.txt"
         
