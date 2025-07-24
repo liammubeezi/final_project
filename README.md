@@ -9,3 +9,11 @@ for creating and using a virtual environment of mac:
 python3 -m venv venv - creation
 source venv/bin/activate - activation
 deactivate - deactivation
+
+for creating and using a virtual environment on mac:
+python3 -m venv venv - creation
+.\venv\Scripts\Activate.ps1 - activation
+deactivate - deactivation
+
+
+Then you can install the pytest on the virtual environemt
